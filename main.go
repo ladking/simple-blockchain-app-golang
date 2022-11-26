@@ -15,8 +15,8 @@ import (
 	"github.com/joho/godotenv"
 )
 
-//blockchain app of a healthcare company collectin gpulse data of heartbeat
-// strcut of each block that will make up the blockchain
+//blockchain app of a healthcare company collecting pulse data of heartbeat
+// struct of each block that will make up the blockchain
 
 type Block struct {
 	Index     int    //position of data record in the blockchain
@@ -26,7 +26,7 @@ type Block struct {
 	PrevHash  string //sha256 identifier of the previous record in the chain
 }
 
-// blockchain itself is a sloce of data
+// blockchain itself is a slice of data
 var Blockchain []Block
 
 //How does hashing fit into blocks and blockchanin?? we use hashes to identify and keep the blocks in the right order
@@ -128,7 +128,7 @@ func makeMuxRouter() http.Handler {
 }
 
 func readFromBlockchain(res http.ResponseWriter, req *http.Request) {
-	bytes, err := json.MarshalIndent(Blockchain, "", " ")
+	bytes, err := json.Marshal(Blockchain)
 	if err != nil {
 		http.Error(res, err.Error(), http.StatusInternalServerError)
 		return
